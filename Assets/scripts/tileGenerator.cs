@@ -3,26 +3,28 @@ using System.Collections;
 
 public class tileGenerator : MonoBehaviour {
 
-    public Object genericTile;
-    public int matriceSize;
+    public GameObject genericTile;
+    public GameObject Cube;
 
-    private Object[ , ] tileArray;
 	// Use this for initialization
 	void Start () {
-    Object tile;
-        tileArray = new Object[matriceSize, matriceSize];
-	for (int z = 0; z < matriceSize; z++)
+
+        GameObject tileInstance;
+	    for (int z = 0; z < globalScript.tileMapSize; z++)
         {
-            for (int x = 0; x < 10; x++)
+            for (int x = 0; x < globalScript.tileMapSize; x++)
             {
-                
-                tile = Instantiate(genericTile, new Vector3(x * 1.02f , .00f, z * 1.02f ), Quaternion.identity);
-                tileArray[x, z] = tile;
+                tileInstance = Instantiate(genericTile, new Vector3(x * 1.02f , .00f, z * 1.02f ), Quaternion.identity) as GameObject;
+                tileScript tile = tileInstance.GetComponent<tileScript>();
+                tile.setPosition(x, z);
+                globalScript.tileMap[x, z] = tile;
             }
         }
 
+        testTeams();
     }
 	
+    
 	// Update is called once per frame
 	void Update () {
 	    // If character has been selected
@@ -34,17 +36,48 @@ public class tileGenerator : MonoBehaviour {
     {
         x_pos = -1;
         z_pos = -1;
-        for (int x = 0; x < matriceSize; x++)
+        for (int x = 0; x < globalScript.tileMapSize; x++)
         {
-            for (int z = 0; z < matriceSize; z++)
+            for (int z = 0; z < globalScript.tileMapSize; z++)
             {
-                if (tileArray[x,z] == tile)
+                if (globalScript.tileMap[x,z] == tile)
                 {
                     x_pos = x;
                     z_pos = z;
                 }
             }
         }
+    }
+
+    private void testTeams()
+    {
+        GameObject cubeInstance = Instantiate(Cube) as GameObject;
+        characterScript team1character1 = cubeInstance.GetComponent<characterScript>();
+
+        cubeInstance = Instantiate(Cube) as GameObject;
+        characterScript team1character2 = cubeInstance.GetComponent<characterScript>();
+
+        teamScript team1 = new teamScript("Blue", Color.blue);
+        team1.characterList.Add(team1character1);
+        team1.characterList.Add(team1character2);
+        team1character1.setCharacter(team1, 0, 0);
+        team1character2.setCharacter(team1, 1, 1);
+
+
+        cubeInstance = Instantiate(Cube) as GameObject;
+        characterScript team2character1 = cubeInstance.GetComponent<characterScript>();
+
+        cubeInstance = Instantiate(Cube) as GameObject;
+        characterScript team2character2 = cubeInstance.GetComponent<characterScript>();
+
+        teamScript team2 = new teamScript("Red", Color.red);
+        team2.characterList.Add(team2character1);
+        team2.characterList.Add(team2character2);
+        team2character1.setCharacter(team2, globalScript.tileMapSize - 1, globalScript.tileMapSize - 1);
+        team2character2.setCharacter(team2, globalScript.tileMapSize - 2, globalScript.tileMapSize - 2);
+
+        globalScript.createTeam(team1);
+        globalScript.createTeam(team2);
     }
 
 }
