@@ -103,7 +103,6 @@ GameObject:
   - 124: {fileID: 227375838}
   - 81: {fileID: 227375837}
   - 114: {fileID: 227375842}
-  - 114: {fileID: 227375843}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -193,17 +192,6 @@ MonoBehaviour:
   genericTile: {fileID: 1000012575259488, guid: bf93c1d2ed4664c4491c519e2624b4b8,
     type: 2}
   Cube: {fileID: 1000010727368102, guid: 2feeb6855488e304ab02eea40d2d5a22, type: 2}
---- !u!114 &227375843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 227375836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63c86788b30eb464d855b76787520d56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1087706474
 GameObject:
   m_ObjectHideFlags: 0

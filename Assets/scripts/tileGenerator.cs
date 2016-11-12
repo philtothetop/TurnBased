@@ -10,7 +10,8 @@ public class tileGenerator : MonoBehaviour {
 	void Start () {
 
         GameObject tileInstance;
-	    for (int z = 0; z < globalScript.tileMapSize; z++)
+        globalScript.Init();
+        for (int z = 0; z < globalScript.tileMapSize; z++)
         {
             for (int x = 0; x < globalScript.tileMapSize; x++)
             {
