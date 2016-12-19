@@ -9,9 +9,14 @@ public class globalScript {
     static public teamScript currentTeam;
     static public List<teamScript> teamList;
 
+	static private Board gameBoard;
+
     // Use this for initialization
     static public void Init () {
-	    tileMap = new tileScript[tileMapSize, tileMapSize];
+		//tileMap = new tileScript[tileMapSize, tileMapSize];
+
+		// Would need to have a board here, with a 1x1 sprited cubes grid
+		gameBoard = new Board(tileMapSize, null);
         selectedCharacter = null;
         teamList = new List<teamScript>();
     }
